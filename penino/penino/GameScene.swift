@@ -38,7 +38,7 @@ class GameScene: SKScene {
             return
         }
         
-        if let touch = touches.first{
+        if let touch = touches.first {
             let location = touch.location(in: self)
             switch location.x{
             case -207 ... -140:
@@ -129,7 +129,7 @@ class GameScene: SKScene {
             var last_n = board.count-1
             for i in (0 ..< board.count).reversed() {
                 if old_board[i][j] == 0 && (board.count-1-i) < v_board[j].count {
-                    v_board[j][board.count-1-i].removeFromParent()
+                    waitToRemove(ficha: v_board[j][board.count-1-i])
                     v_update.append((j, board.count-1-i))
                     //v_board[j].remove(at: board.count-i)
                     continue
@@ -313,6 +313,13 @@ class GameScene: SKScene {
             }
         }
         return pointsOfPlayer
+    }
+    
+    func waitToRemove(ficha: SKSpriteNode) {
+        let delay = 2
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(delay), execute: {
+            ficha.removeFromParent()
+        })
     }
     
     override func update(_ currentTime: TimeInterval) {
