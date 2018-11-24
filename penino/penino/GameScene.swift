@@ -317,8 +317,14 @@ class GameScene: SKScene {
     
     func waitToRemove(ficha: SKSpriteNode) {
         let delay = 2
+        let explosion = SKEmitterNode(fileNamed: "Explosion")!
+        explosion.position = ficha.position
+        explosion.zPosition = 1
+        self.addChild(explosion)
+        print(ficha.position.y)
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(delay), execute: {
             ficha.removeFromParent()
+            explosion.removeFromParent()
         })
     }
     
