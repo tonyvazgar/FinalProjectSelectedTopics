@@ -66,10 +66,8 @@ class GameScene: SKScene {
                 return
             }
             
-            print("\(playerTurn) -> \(scores)")
-            printBoard()
-            print(v_board)
             makeCombo()
+            print("\(playerTurn) -> \(scores)")
             playerTurn = (playerTurn%n_players) + 1
             
         }
