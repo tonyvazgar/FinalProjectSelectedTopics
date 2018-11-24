@@ -33,6 +33,10 @@ class GameScene: SKScene {
  
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if board[0].allSatisfy({$0 != 0}) {
+            gameOver()
+            return
+        }
         
         if let touch = touches.first{
             let location = touch.location(in: self)
@@ -70,8 +74,10 @@ class GameScene: SKScene {
             print("\(playerTurn) -> \(scores)")
             playerTurn = (playerTurn%n_players) + 1
             
+            
         }
     }
+
     
     func setFicha(divisor: CGFloat) -> SKSpriteNode{
         let ficha = SKSpriteNode(imageNamed: nombre[playerTurn-1])
@@ -102,6 +108,10 @@ class GameScene: SKScene {
         }
     }
     
+    func gameOver() {
+        print("GameOver")
+    }
+    
     func printBoard() {
         _ = board.map {_ = $0.map {print($0, terminator: " ")}; print()}
     }
@@ -130,7 +140,7 @@ class GameScene: SKScene {
                 }
             }
         }
-        _ = v_update.reversed().map { v_board[$0.0].remove(at: $0.1)}
+        _ = v_update.reversed().map { v_board[$0.0].remove(at: $0.1) }
         
     }
     
