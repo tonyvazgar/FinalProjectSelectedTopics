@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "penino/GameScene.swift"
+            timestampString = "564967214.044742"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "12"
+            endingLineNumber = "12"
+            landmarkName = "GameScene"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "penino.GameScene.__allocating_init(size: __C.CGSize) -&gt; penino.GameScene"
+                  moduleName = "penino"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/carloscastelan/Desktop/Oton%CC%83o_2018(5to%20y%20septimo)/Temas_Selectos1/FinalProjectSelectedTopics/penino/penino/GameScene.swift"
+                  timestampString = "564962630.861053"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "penino.GameScene.init(size: __C.CGSize) -&gt; penino.GameScene"
+                  moduleName = "penino"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/carloscastelan/Desktop/Oton%CC%83o_2018(5to%20y%20septimo)/Temas_Selectos1/FinalProjectSelectedTopics/penino/penino/GameScene.swift"
+                  timestampString = "564962630.863193"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "35">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "penino.GameScene.__allocating_init() -&gt; penino.GameScene"
+                  moduleName = "penino"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/carloscastelan/Desktop/Oton%CC%83o_2018(5to%20y%20septimo)/Temas_Selectos1/FinalProjectSelectedTopics/penino/penino/GameScene.swift"
+                  timestampString = "564962630.8656991"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "penino.GameScene.init() -&gt; penino.GameScene"
+                  moduleName = "penino"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/carloscastelan/Desktop/Oton%CC%83o_2018(5to%20y%20septimo)/Temas_Selectos1/FinalProjectSelectedTopics/penino/penino/GameScene.swift"
+                  timestampString = "564962630.868837"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "25">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "penino.GameScene.__allocating_init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;penino.GameScene&gt;"
+                  moduleName = "penino"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/carloscastelan/Desktop/Oton%CC%83o_2018(5to%20y%20septimo)/Temas_Selectos1/FinalProjectSelectedTopics/penino/penino/GameScene.swift"
+                  timestampString = "564962630.873636"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "penino.GameScene.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;penino.GameScene&gt;"
+                  moduleName = "penino"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/carloscastelan/Desktop/Oton%CC%83o_2018(5to%20y%20septimo)/Temas_Selectos1/FinalProjectSelectedTopics/penino/penino/GameScene.swift"
+                  timestampString = "564962630.876516"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "penino.GameScene.__deallocating_deinit"
+                  moduleName = "penino"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/carloscastelan/Desktop/Oton%CC%83o_2018(5to%20y%20septimo)/Temas_Selectos1/FinalProjectSelectedTopics/penino/penino/GameScene.swift"
+                  timestampString = "564962630.87886"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

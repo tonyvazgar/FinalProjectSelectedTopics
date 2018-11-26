@@ -10,14 +10,17 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene {
-    var nombre = ["ficha", "fichaA"]
+    let nombre = ["ficha", "fichaA"]
+    let colores = [#colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1), #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)]
+    let labelPosition = [CGPoint(x: -103.5, y: 300), CGPoint(x: 103.5, y: 300)]
+    let labelContent = ["P1: ", "P2: ", "P3: ", "P4: "]
     var board = [[Int]]()
     var n_players = 0
     var playerTurn = 0
     var scores = [Int]()
     var v_board = [[SKSpriteNode]]()
     var isUpdating = 0
-    var jugadoresL: Array<SKLabelNode>!
+    var jugadoresL: [SKLabelNode]!
     
     
     override func didMove(to view: SKView) {
@@ -34,6 +37,18 @@ class GameScene: SKScene {
         jugadoresL = Array.init(repeating: SKLabelNode(), count: n_players)
         
         
+        for i in 0..<n_players{
+            let label = SKLabelNode(text: "P\(i + 1): \(scores[i])")
+            label.position = labelPosition[i]
+            label.fontSize = 40
+            label.fontName = "Arial"
+            label.fontColor = colores[i]
+            label.zPosition = 2
+            addChild(label)
+            jugadoresL[i] = label
+            
+        }
+
     }
     
  
@@ -41,7 +56,6 @@ class GameScene: SKScene {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if isUpdating > 0 { return }
         if v_board.allSatisfy({$0.count == board.count}) {
-            gameOver()
             return
         }
         
@@ -49,38 +63,34 @@ class GameScene: SKScene {
             let location = touch.location(in: self)
             switch location.x{
             case -207 ... -140:
-                print("Primera Columna")
                 if !moveIsValid(col: 0) { return }
                 makeMove(col: 0, ficha: setFicha(divisor: -2.45))
             case -139 ... -71:
-                print("Segunda Columna")
                 if !moveIsValid(col: 1) { return }
                 makeMove(col: 1, ficha: setFicha(divisor: -4))
             case -70 ... -2:
-                print("Tercera Columna")
                 if !moveIsValid(col: 2) { return }
                 makeMove(col: 2, ficha: setFicha(divisor: -11.6))
             case -1 ... 67:
-                print("Cuarta Columna")
                 if !moveIsValid(col: 3) { return }
                 makeMove(col: 3, ficha: setFicha(divisor: 11.6))
             case 68 ... 136:
-                print("Quinta Columna")
                 if !moveIsValid(col: 4) { return }
                 makeMove(col: 4, ficha: setFicha(divisor: 4))
             case 137 ... 207:
-                print("Sexto Columna")
                 if !moveIsValid(col: 5) { return }
                 makeMove(col: 5, ficha: setFicha(divisor: 2.45))
             default:
-                print("Columna Vacia")
                 return
             }
-            
+            if v_board.allSatisfy({$0.count == board.count}) {
+                gameOver()
+                return
+            }
             makeCombo()
-            print("\(playerTurn) -> \(scores)")
-            printBoard()
-            printVBoard()
+            for i in 0..<jugadoresL.count {
+                jugadoresL[i].text = "\(jugadoresL[i].text!.components(separatedBy: " ")[0]) \(scores[i])"
+            }
             playerTurn = (playerTurn%n_players) + 1
             
             
@@ -122,12 +132,6 @@ class GameScene: SKScene {
         print("GameOver")
     }
     
-    func printBoard() {
-        _ = board.map {_ = $0.map {print($0, terminator: " ")}; print()}
-    }
-    func printVBoard() {
-        _ = v_board.map {_ = $0.map {print($0.texture!.description , terminator: " ")}; print()}
-    }
     
     func updateBoard(pointsToRemove: [[(Int, Int)]], mult: Double) {
         // Copies the old board
@@ -135,7 +139,6 @@ class GameScene: SKScene {
         var v_update = [(Int, Int)]()
         // Removes the connects
         _ = pointsToRemove.map { _ = $0.map { old_board[$0.0][$0.1] = 0 } }
-        print(pointsToRemove)
         // Clear board
         board = board.map {$0.map {$0 * 0}}
         //var intento = 0
@@ -146,12 +149,7 @@ class GameScene: SKScene {
                 if old_board[i][j] == 0 && (board.count-1-i) < v_board[j].count {
                    
                     v_update.append((j, board.count-1-i))
-                    waitToRemove(ficha: v_board[j][board.count-1-i], mult: mult)//, col: j, row: board.count-1-i)
-                    //intento += 1
-                    //print("Ficha a remover: (\(j), \(board.count-1-i)) -> i: \(intento), index: ", terminator: "")
-                    //print(v_board[j].firstIndex(of: v_board[j][board.count-1-i])!)
-                    //v_update.append((j, board.count-1-i))
-                    //v_board[j].remove(at: v_board[j].firstIndex(of: board.count-i)!)
+                    waitToRemove(ficha: v_board[j][board.count-1-i], mult: mult)
                     continue
                 }
                 if old_board[i][j] != 0 {
@@ -161,10 +159,6 @@ class GameScene: SKScene {
             }
         }
         _ = v_update.reversed().map { v_board[$0.0].remove(at: $0.1) }
-        print(v_update)
-        //_ = v_update.reversed().map { waitToRemove(ficha: v_board[$0.0][$0.1], col: $0.0, row: $0.1) }
-        
-        
     }
     
     func makeCombo() {
@@ -178,8 +172,6 @@ class GameScene: SKScene {
                 scores[playerTurn-1] += (combo.map { $0.count-3}).reduce(0, +)
                 updateBoard(pointsToRemove: combo, mult: time)
                 time += 1.0
-                //print(scores)
-                //printBoard()
             } while !isTurnFinished[playerTurn-1]
             
             var pointsToRemove = [[(Int, Int)]]()
@@ -191,10 +183,6 @@ class GameScene: SKScene {
             }
             updateBoard(pointsToRemove: pointsToRemove, mult: time)
             time += 1.0
-            //print(pointsToRemove)
-            //print(scores)
-            //printBoard()
-            
             
         }
     }
