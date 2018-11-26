@@ -16,6 +16,7 @@ class GameScene: SKScene {
     var playerTurn = 0
     var scores = [Int]()
     var v_board = [[SKSpriteNode]]()
+    var isUpdating = 0
     
     override func didMove(to view: SKView) {
         resetGame(players: 2, board_size: (7, 6))
@@ -33,7 +34,8 @@ class GameScene: SKScene {
  
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if board[0].allSatisfy({$0 != 0}) {
+        if isUpdating > 0 { return }
+        if v_board.allSatisfy({$0.count == board.count}) {
             gameOver()
             return
         }
@@ -43,27 +45,27 @@ class GameScene: SKScene {
             switch location.x{
             case -207 ... -140:
                 print("Primera Columna")
-                if !moveIsValid(col: 0) { break }
+                if !moveIsValid(col: 0) { return }
                 makeMove(col: 0, ficha: setFicha(divisor: -2.45))
             case -139 ... -71:
                 print("Segunda Columna")
-                if !moveIsValid(col: 1) { break }
+                if !moveIsValid(col: 1) { return }
                 makeMove(col: 1, ficha: setFicha(divisor: -4))
             case -70 ... -2:
                 print("Tercera Columna")
-                if !moveIsValid(col: 2) { break }
+                if !moveIsValid(col: 2) { return }
                 makeMove(col: 2, ficha: setFicha(divisor: -11.6))
             case -1 ... 67:
                 print("Cuarta Columna")
-                if !moveIsValid(col: 3) { break }
+                if !moveIsValid(col: 3) { return }
                 makeMove(col: 3, ficha: setFicha(divisor: 11.6))
             case 68 ... 136:
                 print("Quinta Columna")
-                if !moveIsValid(col: 4) { break }
+                if !moveIsValid(col: 4) { return }
                 makeMove(col: 4, ficha: setFicha(divisor: 4))
             case 137 ... 207:
                 print("Sexto Columna")
-                if !moveIsValid(col: 5) { break }
+                if !moveIsValid(col: 5) { return }
                 makeMove(col: 5, ficha: setFicha(divisor: 2.45))
             default:
                 print("Columna Vacia")
@@ -72,6 +74,8 @@ class GameScene: SKScene {
             
             makeCombo()
             print("\(playerTurn) -> \(scores)")
+            printBoard()
+            printVBoard()
             playerTurn = (playerTurn%n_players) + 1
             
             
@@ -95,7 +99,8 @@ class GameScene: SKScene {
     }
     
     func moveIsValid(col: Int) -> Bool{
-        return board[0][col] == 0
+        //return board[0][col] == 0
+        return v_board[col].count < board.count
     }
     
     func makeMove(col: Int, ficha: SKSpriteNode) {
@@ -115,23 +120,33 @@ class GameScene: SKScene {
     func printBoard() {
         _ = board.map {_ = $0.map {print($0, terminator: " ")}; print()}
     }
+    func printVBoard() {
+        _ = v_board.map {_ = $0.map {print($0.texture!.description , terminator: " ")}; print()}
+    }
     
-    func updateBoard(pointsToRemove: [[(Int, Int)]]) {
+    func updateBoard(pointsToRemove: [[(Int, Int)]], mult: Double) {
         // Copies the old board
         var old_board = board
         var v_update = [(Int, Int)]()
         // Removes the connects
         _ = pointsToRemove.map { _ = $0.map { old_board[$0.0][$0.1] = 0 } }
+        print(pointsToRemove)
         // Clear board
         board = board.map {$0.map {$0 * 0}}
+        //var intento = 0
         // Fall of numbers (copy elements to the actual board)
         for j in 0 ..< board[0].count {
             var last_n = board.count-1
             for i in (0 ..< board.count).reversed() {
                 if old_board[i][j] == 0 && (board.count-1-i) < v_board[j].count {
-                    waitToRemove(ficha: v_board[j][board.count-1-i])
+                   
                     v_update.append((j, board.count-1-i))
-                    //v_board[j].remove(at: board.count-i)
+                    waitToRemove(ficha: v_board[j][board.count-1-i], mult: mult)//, col: j, row: board.count-1-i)
+                    //intento += 1
+                    //print("Ficha a remover: (\(j), \(board.count-1-i)) -> i: \(intento), index: ", terminator: "")
+                    //print(v_board[j].firstIndex(of: v_board[j][board.count-1-i])!)
+                    //v_update.append((j, board.count-1-i))
+                    //v_board[j].remove(at: v_board[j].firstIndex(of: board.count-i)!)
                     continue
                 }
                 if old_board[i][j] != 0 {
@@ -141,18 +156,23 @@ class GameScene: SKScene {
             }
         }
         _ = v_update.reversed().map { v_board[$0.0].remove(at: $0.1) }
+        print(v_update)
+        //_ = v_update.reversed().map { waitToRemove(ficha: v_board[$0.0][$0.1], col: $0.0, row: $0.1) }
+        
         
     }
     
     func makeCombo() {
         var isTurnFinished = Array.init(repeating: false, count: n_players)
+        var time : Double = 1.5
         
         while !isTurnFinished.allSatisfy({ $0 }) {
             repeat {
                 let combo = searchConnected(board: board, player: playerTurn)
                 isTurnFinished[playerTurn-1] = combo.isEmpty
                 scores[playerTurn-1] += (combo.map { $0.count-3}).reduce(0, +)
-                updateBoard(pointsToRemove: combo)
+                updateBoard(pointsToRemove: combo, mult: time)
+                time += 1.0
                 //print(scores)
                 //printBoard()
             } while !isTurnFinished[playerTurn-1]
@@ -164,7 +184,8 @@ class GameScene: SKScene {
                 pointsToRemove.append(contentsOf: points)
                 isTurnFinished[player-1] = points.isEmpty
             }
-            updateBoard(pointsToRemove: pointsToRemove)
+            updateBoard(pointsToRemove: pointsToRemove, mult: time)
+            time += 1.0
             //print(pointsToRemove)
             //print(scores)
             //printBoard()
@@ -315,12 +336,39 @@ class GameScene: SKScene {
         return pointsOfPlayer
     }
     
-    func waitToRemove(ficha: SKSpriteNode) {
-        let delay = 2
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(delay), execute: {
+    func waitToRemove(ficha: SKSpriteNode, mult: Double) { //}, col: Int, row: Int) {
+        let delay = DispatchTime.now() + mult
+        isUpdating += 1
+       
+        DispatchQueue.main.asyncAfter(deadline: delay, execute: {
+            let explosion = SKEmitterNode(fileNamed: "Explosion")!
+            explosion.particleTexture = ficha.texture
+            explosion.particleSize = CGSize(width: 20, height: 20)
+            explosion.position = ficha.position
+            explosion.zPosition = 1
+            
+            self.addChild(explosion)
             ficha.removeFromParent()
+            DispatchQueue.main.asyncAfter(deadline: delay + 1.0, execute: {
+                explosion.removeFromParent()
+            })
+            self.isUpdating -= 1
+            
         })
+        
     }
+    /*
+    let d
+    let explotsion = SKEmitterNode(fileNamed: "Explosion")
+    explosion.particleTexture = ficha.texture
+    explosion.particleSize = CGSize(width: 20, height: 20)
+    explosion.position = ficha.position
+    explosion.zPosition = 1
+    self.addChild(explosion)
+    ficha.removeFromParent()
+    Dispatch
+        explosion.removeFromParent()
+     */
     
     override func update(_ currentTime: TimeInterval) {
         
