@@ -17,6 +17,8 @@ class GameScene: SKScene {
     var scores = [Int]()
     var v_board = [[SKSpriteNode]]()
     var isUpdating = 0
+    var jugadoresL: Array<SKLabelNode>!
+    
     
     override func didMove(to view: SKView) {
         resetGame(players: 2, board_size: (7, 6))
@@ -29,6 +31,9 @@ class GameScene: SKScene {
         playerTurn = 1
         board = Array.init(repeating: Array.init(repeating: 0, count: board_size.1), count: board_size.0)
         v_board = Array.init(repeating: [], count: board_size.1)
+        jugadoresL = Array.init(repeating: SKLabelNode(), count: n_players)
+        
+        
     }
     
  

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		782D10DA21AC9A2700A55098 /* explosion.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 782D10D821AC9A2700A55098 /* explosion.mp3 */; };
+		782D10DB21AC9A2700A55098 /* Explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 782D10D921AC9A2700A55098 /* Explosion.sks */; };
 		7848967721A71566008DFFCA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7848967621A71566008DFFCA /* AppDelegate.swift */; };
 		7848967921A71566008DFFCA /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7848967821A71566008DFFCA /* GameScene.sks */; };
 		7848967B21A71566008DFFCA /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7848967A21A71566008DFFCA /* Actions.sks */; };
@@ -15,11 +17,11 @@
 		7848968221A71566008DFFCA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7848968021A71566008DFFCA /* Main.storyboard */; };
 		7848968421A71567008DFFCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7848968321A71567008DFFCA /* Assets.xcassets */; };
 		7848968721A71567008DFFCA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7848968521A71567008DFFCA /* LaunchScreen.storyboard */; };
-		AB2EC69121AC8D0500955655 /* Explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = AB2EC69021AC8D0400955655 /* Explosion.sks */; };
-		AB2EC69321AC8D0B00955655 /* explosion.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AB2EC69221AC8D0B00955655 /* explosion.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		782D10D821AC9A2700A55098 /* explosion.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = explosion.mp3; sourceTree = "<group>"; };
+		782D10D921AC9A2700A55098 /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Explosion.sks; sourceTree = "<group>"; };
 		7848967321A71566008DFFCA /* penino.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = penino.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7848967621A71566008DFFCA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7848967821A71566008DFFCA /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -30,8 +32,6 @@
 		7848968321A71567008DFFCA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7848968621A71567008DFFCA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7848968821A71567008DFFCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AB2EC69021AC8D0400955655 /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Explosion.sks; path = ../../../../../Downloads/Explosion.sks; sourceTree = "<group>"; };
-		AB2EC69221AC8D0B00955655 /* explosion.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = explosion.mp3; path = ../../../../../Downloads/explosion.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,9 +66,9 @@
 			children = (
 				7848967621A71566008DFFCA /* AppDelegate.swift */,
 				7848967821A71566008DFFCA /* GameScene.sks */,
+				782D10D821AC9A2700A55098 /* explosion.mp3 */,
+				782D10D921AC9A2700A55098 /* Explosion.sks */,
 				7848967A21A71566008DFFCA /* Actions.sks */,
-				AB2EC69221AC8D0B00955655 /* explosion.mp3 */,
-				AB2EC69021AC8D0400955655 /* Explosion.sks */,
 				7848967C21A71566008DFFCA /* GameScene.swift */,
 				7848967E21A71566008DFFCA /* GameViewController.swift */,
 				7848968021A71566008DFFCA /* Main.storyboard */,
@@ -137,13 +137,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				782D10DA21AC9A2700A55098 /* explosion.mp3 in Resources */,
 				7848968221A71566008DFFCA /* Main.storyboard in Resources */,
 				7848967921A71566008DFFCA /* GameScene.sks in Resources */,
 				7848968421A71567008DFFCA /* Assets.xcassets in Resources */,
 				7848968721A71567008DFFCA /* LaunchScreen.storyboard in Resources */,
-				AB2EC69321AC8D0B00955655 /* explosion.mp3 in Resources */,
+				782D10DB21AC9A2700A55098 /* Explosion.sks in Resources */,
 				7848967B21A71566008DFFCA /* Actions.sks in Resources */,
-				AB2EC69121AC8D0500955655 /* Explosion.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
