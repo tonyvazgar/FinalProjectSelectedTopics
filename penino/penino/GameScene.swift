@@ -336,6 +336,7 @@ class GameScene: SKScene {
         return pointsOfPlayer
     }
     
+
     func waitToRemove(ficha: SKSpriteNode, mult: Double) { //}, col: Int, row: Int) {
         let delay = DispatchTime.now() + mult
         isUpdating += 1
@@ -353,9 +354,7 @@ class GameScene: SKScene {
                 explosion.removeFromParent()
             })
             self.isUpdating -= 1
-            
         })
-        
     }
     /*
     let d
