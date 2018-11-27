@@ -11,9 +11,8 @@ import GameplayKit
 
 class GameScene: SKScene {
     let nombre = ["ficha", "fichaA"]
-    let colores = [#colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1), #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)]
-    let labelPosition = [CGPoint(x: -103.5, y: 300), CGPoint(x: 103.5, y: 300)]
-    let labelContent = ["P1: ", "P2: ", "P3: ", "P4: "]
+    let colores = [#colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1), #colorLiteral(red: 0.9994240403, green: 0.9855536819, blue: 0, alpha: 1)]
+    let labelPosition = [CGPoint(x: -103.5, y: 300), CGPoint(x: 103.5, y: 300), CGPoint(x: -103.5, y: -300), CGPoint(x: 103.5, y: -300)]
     var board = [[Int]]()
     var n_players = 0
     var playerTurn = 0
@@ -42,7 +41,7 @@ class GameScene: SKScene {
             label.position = labelPosition[i]
             label.fontSize = 40
             label.fontName = "Arial"
-            label.fontColor = colores[i]
+            label.fontColor = colores[i].withAlphaComponent((i == 0 ? 1.0 :0.5))
             label.zPosition = 2
             addChild(label)
             jugadoresL[i] = label
@@ -91,7 +90,16 @@ class GameScene: SKScene {
             for i in 0..<jugadoresL.count {
                 jugadoresL[i].text = "\(jugadoresL[i].text!.components(separatedBy: " ")[0]) \(scores[i])"
             }
+            isUpdating += 1
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8, execute: {
+                self.jugadoresL[self.playerTurn-1].fontColor = self.jugadoresL[self.playerTurn-1].fontColor?.withAlphaComponent(0.5)
+                self.playerTurn = (self.playerTurn%self.n_players) + 1
+                self.jugadoresL[self.playerTurn-1].fontColor = self.jugadoresL[self.playerTurn-1].fontColor?.withAlphaComponent(1)
+                self.isUpdating -= 1
+            })
+            /*jugadoresL[playerTurn-1].fontColor = jugadoresL[playerTurn-1].fontColor?.withAlphaComponent(0.5)
             playerTurn = (playerTurn%n_players) + 1
+             jugadoresL[playerTurn-1].fontColor = jugadoresL[playerTurn-1].fontColor?.withAlphaComponent(1)*/
             
             
         }
@@ -349,18 +357,6 @@ class GameScene: SKScene {
             self.isUpdating -= 1
         })
     }
-    /*
-    let d
-    let explotsion = SKEmitterNode(fileNamed: "Explosion")
-    explosion.particleTexture = ficha.texture
-    explosion.particleSize = CGSize(width: 20, height: 20)
-    explosion.position = ficha.position
-    explosion.zPosition = 1
-    self.addChild(explosion)
-    ficha.removeFromParent()
-    Dispatch
-        explosion.removeFromParent()
-     */
     
     override func update(_ currentTime: TimeInterval) {
         
