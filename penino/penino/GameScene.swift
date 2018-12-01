@@ -10,8 +10,8 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene {
-    let nombre = ["ficha", "fichaA"]
-    let colores = [#colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1), #colorLiteral(red: 0.9994240403, green: 0.9855536819, blue: 0, alpha: 1)]
+    let nombre = ["ficha", "fichaA", "fichaV", "fichaM"]
+    let colores = [#colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1), #colorLiteral(red: 0.9994240403, green: 0.9855536819, blue: 0, alpha: 1),#colorLiteral(red: 0, green: 0.9768045545, blue: 0, alpha: 1),#colorLiteral(red: 0.5791940689, green: 0.1280144453, blue: 0.5726861358, alpha: 1)]
     let labelPosition = [CGPoint(x: -103.5, y: 300), CGPoint(x: 103.5, y: 300), CGPoint(x: -103.5, y: -300), CGPoint(x: 103.5, y: -300)]
     var board = [[Int]]()
     var n_players = 0
@@ -20,7 +20,6 @@ class GameScene: SKScene {
     var v_board = [[SKSpriteNode]]()
     var isUpdating = 0
     var jugadoresL: [SKLabelNode]!
-    
     
     override func didMove(to view: SKView) {
         resetGame(players: 2, board_size: (7, 6))
@@ -82,7 +81,7 @@ class GameScene: SKScene {
             default:
                 return
             }
-            if v_board.allSatisfy({$0.count == board.count}) {
+            if v_board.allSatisfy({$0.count == board.count}) || scores.contains(10){
                 gameOver()
                 return
             }
